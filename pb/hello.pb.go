@@ -3,7 +3,7 @@
 
 package hello
 
-import proto "github.com/gogo/protobuf/proto"
+import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 
@@ -11,8 +11,6 @@ import (
 	context "golang.org/x/net/context"
 	grpc "google.golang.org/grpc"
 )
-
-import github_com_gogo_protobuf_proto "github.com/gogo/protobuf/proto"
 
 import io "io"
 
@@ -25,11 +23,11 @@ var _ = math.Inf
 // is compatible with the proto package it is being compiled against.
 // A compilation error at this line likely means your copy of the
 // proto package needs to be updated.
-const _ = proto.GoGoProtoPackageIsVersion2 // please upgrade the proto package
+const _ = proto.ProtoPackageIsVersion2 // please upgrade the proto package
 
 type HelloReq struct {
-	Msg                  *string  `protobuf:"bytes,1,req,name=msg" json:"msg,omitempty"`
-	Amount               *int64   `protobuf:"varint,2,opt,name=amount" json:"amount,omitempty"`
+	Msg                  string   `protobuf:"bytes,1,opt,name=msg,proto3" json:"msg,omitempty"`
+	Amount               int64    `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -39,7 +37,7 @@ func (m *HelloReq) Reset()         { *m = HelloReq{} }
 func (m *HelloReq) String() string { return proto.CompactTextString(m) }
 func (*HelloReq) ProtoMessage()    {}
 func (*HelloReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_hello_9b4fe07e22217074, []int{0}
+	return fileDescriptor_hello_0249bd3615fa3deb, []int{0}
 }
 func (m *HelloReq) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -69,22 +67,22 @@ func (m *HelloReq) XXX_DiscardUnknown() {
 var xxx_messageInfo_HelloReq proto.InternalMessageInfo
 
 func (m *HelloReq) GetMsg() string {
-	if m != nil && m.Msg != nil {
-		return *m.Msg
+	if m != nil {
+		return m.Msg
 	}
 	return ""
 }
 
 func (m *HelloReq) GetAmount() int64 {
-	if m != nil && m.Amount != nil {
-		return *m.Amount
+	if m != nil {
+		return m.Amount
 	}
 	return 0
 }
 
 type HelloResp struct {
-	Rsp                  *string  `protobuf:"bytes,1,req,name=rsp" json:"rsp,omitempty"`
-	Amount               *int64   `protobuf:"varint,2,opt,name=amount" json:"amount,omitempty"`
+	Rsp                  string   `protobuf:"bytes,1,opt,name=rsp,proto3" json:"rsp,omitempty"`
+	Amount               int64    `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -94,7 +92,7 @@ func (m *HelloResp) Reset()         { *m = HelloResp{} }
 func (m *HelloResp) String() string { return proto.CompactTextString(m) }
 func (*HelloResp) ProtoMessage()    {}
 func (*HelloResp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_hello_9b4fe07e22217074, []int{1}
+	return fileDescriptor_hello_0249bd3615fa3deb, []int{1}
 }
 func (m *HelloResp) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -124,15 +122,15 @@ func (m *HelloResp) XXX_DiscardUnknown() {
 var xxx_messageInfo_HelloResp proto.InternalMessageInfo
 
 func (m *HelloResp) GetRsp() string {
-	if m != nil && m.Rsp != nil {
-		return *m.Rsp
+	if m != nil {
+		return m.Rsp
 	}
 	return ""
 }
 
 func (m *HelloResp) GetAmount() int64 {
-	if m != nil && m.Amount != nil {
-		return *m.Amount
+	if m != nil {
+		return m.Amount
 	}
 	return 0
 }
@@ -229,18 +227,16 @@ func (m *HelloReq) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Msg == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("msg")
-	} else {
+	if len(m.Msg) > 0 {
 		dAtA[i] = 0xa
 		i++
-		i = encodeVarintHello(dAtA, i, uint64(len(*m.Msg)))
-		i += copy(dAtA[i:], *m.Msg)
+		i = encodeVarintHello(dAtA, i, uint64(len(m.Msg)))
+		i += copy(dAtA[i:], m.Msg)
 	}
-	if m.Amount != nil {
+	if m.Amount != 0 {
 		dAtA[i] = 0x10
 		i++
-		i = encodeVarintHello(dAtA, i, uint64(*m.Amount))
+		i = encodeVarintHello(dAtA, i, uint64(m.Amount))
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -263,18 +259,16 @@ func (m *HelloResp) MarshalTo(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Rsp == nil {
-		return 0, github_com_gogo_protobuf_proto.NewRequiredNotSetError("rsp")
-	} else {
+	if len(m.Rsp) > 0 {
 		dAtA[i] = 0xa
 		i++
-		i = encodeVarintHello(dAtA, i, uint64(len(*m.Rsp)))
-		i += copy(dAtA[i:], *m.Rsp)
+		i = encodeVarintHello(dAtA, i, uint64(len(m.Rsp)))
+		i += copy(dAtA[i:], m.Rsp)
 	}
-	if m.Amount != nil {
+	if m.Amount != 0 {
 		dAtA[i] = 0x10
 		i++
-		i = encodeVarintHello(dAtA, i, uint64(*m.Amount))
+		i = encodeVarintHello(dAtA, i, uint64(m.Amount))
 	}
 	if m.XXX_unrecognized != nil {
 		i += copy(dAtA[i:], m.XXX_unrecognized)
@@ -297,12 +291,12 @@ func (m *HelloReq) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.Msg != nil {
-		l = len(*m.Msg)
+	l = len(m.Msg)
+	if l > 0 {
 		n += 1 + l + sovHello(uint64(l))
 	}
-	if m.Amount != nil {
-		n += 1 + sovHello(uint64(*m.Amount))
+	if m.Amount != 0 {
+		n += 1 + sovHello(uint64(m.Amount))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -316,12 +310,12 @@ func (m *HelloResp) Size() (n int) {
 	}
 	var l int
 	_ = l
-	if m.Rsp != nil {
-		l = len(*m.Rsp)
+	l = len(m.Rsp)
+	if l > 0 {
 		n += 1 + l + sovHello(uint64(l))
 	}
-	if m.Amount != nil {
-		n += 1 + sovHello(uint64(*m.Amount))
+	if m.Amount != 0 {
+		n += 1 + sovHello(uint64(m.Amount))
 	}
 	if m.XXX_unrecognized != nil {
 		n += len(m.XXX_unrecognized)
@@ -343,7 +337,6 @@ func sozHello(x uint64) (n int) {
 	return sovHello(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 func (m *HelloReq) Unmarshal(dAtA []byte) error {
-	var hasFields [1]uint64
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -399,15 +392,13 @@ func (m *HelloReq) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(dAtA[iNdEx:postIndex])
-			m.Msg = &s
+			m.Msg = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
 			}
-			var v int64
+			m.Amount = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowHello
@@ -417,12 +408,11 @@ func (m *HelloReq) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
+				m.Amount |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Amount = &v
 		default:
 			iNdEx = preIndex
 			skippy, err := skipHello(dAtA[iNdEx:])
@@ -439,9 +429,6 @@ func (m *HelloReq) Unmarshal(dAtA []byte) error {
 			iNdEx += skippy
 		}
 	}
-	if hasFields[0]&uint64(0x00000001) == 0 {
-		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("msg")
-	}
 
 	if iNdEx > l {
 		return io.ErrUnexpectedEOF
@@ -449,7 +436,6 @@ func (m *HelloReq) Unmarshal(dAtA []byte) error {
 	return nil
 }
 func (m *HelloResp) Unmarshal(dAtA []byte) error {
-	var hasFields [1]uint64
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -505,15 +491,13 @@ func (m *HelloResp) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			s := string(dAtA[iNdEx:postIndex])
-			m.Rsp = &s
+			m.Rsp = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-			hasFields[0] |= uint64(0x00000001)
 		case 2:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
 			}
-			var v int64
+			m.Amount = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowHello
@@ -523,12 +507,11 @@ func (m *HelloResp) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				v |= (int64(b) & 0x7F) << shift
+				m.Amount |= (int64(b) & 0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			m.Amount = &v
 		default:
 			iNdEx = preIndex
 			skippy, err := skipHello(dAtA[iNdEx:])
@@ -544,9 +527,6 @@ func (m *HelloResp) Unmarshal(dAtA []byte) error {
 			m.XXX_unrecognized = append(m.XXX_unrecognized, dAtA[iNdEx:iNdEx+skippy]...)
 			iNdEx += skippy
 		}
-	}
-	if hasFields[0]&uint64(0x00000001) == 0 {
-		return github_com_gogo_protobuf_proto.NewRequiredNotSetError("rsp")
 	}
 
 	if iNdEx > l {
@@ -659,18 +639,18 @@ var (
 	ErrIntOverflowHello   = fmt.Errorf("proto: integer overflow")
 )
 
-func init() { proto.RegisterFile("hello.proto", fileDescriptor_hello_9b4fe07e22217074) }
+func init() { proto.RegisterFile("hello.proto", fileDescriptor_hello_0249bd3615fa3deb) }
 
-var fileDescriptor_hello_9b4fe07e22217074 = []byte{
-	// 147 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_hello_0249bd3615fa3deb = []byte{
+	// 157 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xce, 0x48, 0xcd, 0xc9,
 	0xc9, 0xd7, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x05, 0x73, 0x94, 0x4c, 0xb8, 0x38, 0x3c,
-	0x40, 0x8c, 0xa0, 0xd4, 0x42, 0x21, 0x01, 0x2e, 0xe6, 0xdc, 0xe2, 0x74, 0x09, 0x46, 0x05, 0x26,
+	0x40, 0x8c, 0xa0, 0xd4, 0x42, 0x21, 0x01, 0x2e, 0xe6, 0xdc, 0xe2, 0x74, 0x09, 0x46, 0x05, 0x46,
 	0x0d, 0xce, 0x20, 0x10, 0x53, 0x48, 0x8c, 0x8b, 0x2d, 0x31, 0x37, 0xbf, 0x34, 0xaf, 0x44, 0x82,
 	0x49, 0x81, 0x51, 0x83, 0x39, 0x08, 0xca, 0x53, 0x32, 0xe5, 0xe2, 0x84, 0xea, 0x2a, 0x2e, 0x00,
 	0x69, 0x2b, 0x2a, 0x2e, 0x80, 0x69, 0x2b, 0x2a, 0x2e, 0xc0, 0xa5, 0xcd, 0xc8, 0x94, 0x8b, 0xd5,
 	0xbd, 0x28, 0x35, 0xb5, 0x44, 0x48, 0x07, 0xc6, 0xe0, 0xd7, 0x83, 0xb8, 0x09, 0xe6, 0x06, 0x29,
-	0x01, 0x54, 0x81, 0xe2, 0x02, 0x25, 0x06, 0x27, 0x9e, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92,
-	0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x11, 0x10, 0x00, 0x00, 0xff, 0xff, 0x78, 0xba, 0x68, 0x52, 0xc6,
-	0x00, 0x00, 0x00,
+	0x01, 0x54, 0x81, 0xe2, 0x02, 0x25, 0x06, 0x27, 0x81, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92,
+	0x63, 0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc6, 0x63, 0x39, 0x86, 0x24, 0x36, 0xb0, 0x1f, 0x8c, 0x01,
+	0x01, 0x00, 0x00, 0xff, 0xff, 0x60, 0x43, 0x5e, 0xa4, 0xd2, 0x00, 0x00, 0x00,
 }

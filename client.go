@@ -6,7 +6,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "./pb"
+	pb "github.com/litao44/rpctest/pb"
 )
 
 func main() {
@@ -14,11 +14,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer conn.Close()
 
-	msg := "hello123"
 	cli := pb.NewGreetClient(conn)
 	req := pb.HelloReq{
-		Msg: &msg,
+		Msg:    "hello123",
+		Amount: 2,
 	}
 
 	rsp, err := cli.Greet(context.Background(), &req)
@@ -26,5 +27,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(*rsp.Rsp, rsp.Amount)
+	fmt.Println(rsp.Rsp)
 }
