@@ -1,0 +1,10 @@
+package: .
+import:
+- package: golang.org/x/net
+  repo: git@github.com:golang/net.git
+- package: golang.org/x/text
+  repo: git@github.com:golang/text.git
+- package: golang.org/x/sys
+  repo: git@github.com:golang/sys.git
+- package: google.golang.org/grpc
+- package: google.golang.org/genproto

@@ -25,7 +25,7 @@ func main() {
 type GreetServer struct{}
 
 func (s *GreetServer) Greet(ctx context.Context, req *pb.HelloReq) (*pb.HelloResp, error) {
-	fmt.Printf("received msg: %s, amount: %d", req.Msg, req.Amount)
+	fmt.Printf("received msg: %s, amount: %d\n", req.Msg, req.Amount)
 	return &pb.HelloResp{
 		Rsp: strings.Repeat(req.Msg, int(req.Amount)),
 	}, nil
