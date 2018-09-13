@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package hello;
+
+message HelloReq {
+  required string msg = 1;
+  optional int64 amount = 2;
+}
+
+message HelloResp {
+  required string rsp = 1;
+  optional int64 amount = 2;
+}
+
+service Greet {
+  rpc Greet(HelloReq) returns (HelloResp) {};
+}
